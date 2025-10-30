@@ -27,7 +27,8 @@ export default defineConfig((mode) => {
       host: '0.0.0.0',
       proxy: {
         '/img-tx': {
-          target:  'http://117.72.198.60/',
+          // target:  'http://117.72.198.60/',
+          target: "http://localhost:10010",
           changeOrigin: true,
           // rewrite: (path) => {
           //   return path.replace(/^\/img-tx/, '')
@@ -38,6 +39,25 @@ export default defineConfig((mode) => {
           changeOrigin: true,
         }
       }
+    },
+    build: {
+      chunkSizeWarningLimit: 1500,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('vue')) return 'vendor-vue'
+              if (id.includes('vue-router')) return 'vendor-router'
+              if (id.includes('element-plus')) return 'vendor-element'
+              if (id.includes('echarts')) return 'vendor-echarts'
+              if (id.includes('lodash')) return 'vendor-lodash'
+              if (id.includes('moment')) return 'vendor-moment'
+              if (id.includes('swiper')) return 'vendor-swiper'
+              return 'vendor'
+            }
+          },
+        },
+      },
     },
   }
 })
