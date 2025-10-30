@@ -24,15 +24,11 @@ export default defineConfig((mode) => {
     ],
     server: {
       port: 18082,
-      host: '0.0.0.0',
+      host: 'http://117.72.198.60',
       proxy: {
         '/img-tx': {
-          // target:  'http://117.72.198.60/',
           target: "http://localhost:10010",
           changeOrigin: true,
-          // rewrite: (path) => {
-          //   return path.replace(/^\/img-tx/, '')
-          // }
         },
         '/mock/3359':{
           target: 'http://172.17.0.137:8321/mock/3359',
