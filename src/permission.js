@@ -6,17 +6,17 @@ import 'nprogress/nprogress.css'; // progress bar style
 import { getPermissionStore, getToken } from '@/store';
 import router from '@/router';
 
-const permissionStore = getPermissionStore();
-const userStore = getToken();
-
 // 页面加载进度
 NProgress.configure({ showSpinner: false });
-
-const { whiteListRouters } = permissionStore;
 
 // 登录状态效验
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
+  
+  // 在路由守卫内部获取 store，避免循环依赖问题
+  const permissionStore = getPermissionStore();
+  const userStore = getToken();
+  const { whiteListRouters } = permissionStore;
   const { token } = userStore;
   
   if (token) {
