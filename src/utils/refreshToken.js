@@ -1,7 +1,5 @@
 import axios from 'axios';
-import proxy from "../config/proxy";
-const env = import.meta.env.MODE || 'development';
-const host = env === 'mock' ? 'https://mock.boxuegu.com/mock/3359' : proxy[env].host;
+const host = import.meta.env.VITE_BASE_URL || 'http://61.153.188.157:10010';
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 let isRefresh = false;

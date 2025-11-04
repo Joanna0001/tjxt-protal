@@ -53,7 +53,6 @@ import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
 import { updateUserInfo, getUserInfo } from "@/api/user.js";
 import { useUserStore } from "@/store"
-import proxy from '@/config/proxy';
 
 
 // 组件导入
@@ -64,10 +63,8 @@ import router from "../../router";
 const store = useUserStore()
 const userInfo = ref(store.getUserInfo)
 
-
-
-const env = import.meta.env.MODE || "development"
-const actions = proxy[env].host+'/ms/files'
+const host = import.meta.env.VITE_BASE_URL || 'http://61.153.188.157:10010'
+const actions = host + '/ms/files'
 const uploadHeaders = {authorization: store.getToken}
 const tabData = [
   {id: 0, name: '基本信息'},
