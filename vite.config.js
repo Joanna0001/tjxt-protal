@@ -31,22 +31,18 @@ export default defineConfig({
     }
   },
   build: {
-    chunkSizeWarningLimit: 1500,
+    sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('vue')) return 'vendor-vue'
-            if (id.includes('vue-router')) return 'vendor-router'
-            if (id.includes('element-plus')) return 'vendor-element'
-            if (id.includes('echarts')) return 'vendor-echarts'
-            if (id.includes('lodash')) return 'vendor-lodash'
-            if (id.includes('moment')) return 'vendor-moment'
-            if (id.includes('swiper')) return 'vendor-swiper'
-            return 'vendor'
-          }
+        manualChunks: {
+          vue: ['vue', 'vue-router'],
+          elementPlus: ['element-plus', '@element-plus/icons-vue'],
+          echarts: ['echarts'],
+          vod: ['vod-js-sdk-v6'],
+          moment: ['moment'],
         },
       },
     },
+    chunkSizeWarningLimit: 1500,
   },
 })
