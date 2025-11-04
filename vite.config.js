@@ -37,9 +37,8 @@ export default defineConfig({
         manualChunks: {
           vue: ['vue', 'vue-router'],
           elementPlus: ['element-plus', '@element-plus/icons-vue'],
-          echarts: ['echarts'],
-          vod: ['vod-js-sdk-v6'],
           moment: ['moment'],
+          swiper: ['swiper'],
         },
       },
     },
