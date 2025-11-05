@@ -22,7 +22,8 @@ export default defineConfig({
     port: 18082,
     proxy: {
       '/img-tx': {
-        target: "http://61.153.188.157:10010",
+        target: "http://localhost:10010",
+        // target: "http://61.153.188.157:10010",
         changeOrigin: true,
         rewrite: (path) => {
           return path.replace(/^\/img-tx/, '')
