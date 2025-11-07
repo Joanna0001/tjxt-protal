@@ -75,10 +75,14 @@ instance.interceptors.response.use(
       return response.data;
     }
 
-    // 3.业务状态码为401，代表未登录
+    // 3.业务状态码为401，代表未登录，尝试刷新token
     if (code === 401 && isLogin) {
-      isLogin = false;
-      alertLoginMessage();
+      // 构造一个类似错误的对象，用于刷新token后重试
+      const mockError = {
+        config: response.config,
+        response: response
+      };
+      return refreshToken(mockError);
     }
 
     return response.data;
